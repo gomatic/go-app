@@ -3,8 +3,8 @@ module github.com/gomatic/go-app
 go 1.26.4
 
 require (
-	github.com/gomatic/go-log v0.1.0
-	github.com/gomatic/go-output v0.1.0
+	github.com/gomatic/go-log v0.2.0
+	github.com/gomatic/go-output v0.2.0
 	github.com/stretchr/testify v1.11.1
 	github.com/urfave/cli/v3 v3.10.0
 )
@@ -102,7 +102,7 @@ require (
 	github.com/golangci/rowserrcheck v0.0.0-20260419091836-c5f79b8a11ba // indirect
 	github.com/golangci/swaggoswag v0.0.0-20250504205917-77f2aca3143e // indirect
 	github.com/golangci/unconvert v0.0.0-20250410112200-a129a6e6413e // indirect
-	github.com/gomatic/go-error v0.1.0 // indirect
+	github.com/gomatic/go-error v0.2.2 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect
 	github.com/gordonklaus/ineffassign v0.2.0 // indirect

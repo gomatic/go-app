@@ -20,7 +20,7 @@ func LogLevelFlag(cfg *log.LoggerConfig, envPrefix string) cli.Flag {
 // LogFormatFlag returns the standard --log-format global flag, sourced from
 // <envPrefix>LOG_FORMAT, bound to cfg, defaulting to def (consumers differ:
 // a CLI defaults to text, a daemon to json).
-func LogFormatFlag(cfg *log.LoggerConfig, envPrefix string, def log.LogFormat) cli.Flag {
+func LogFormatFlag(cfg *log.LoggerConfig, envPrefix string, def log.Format) cli.Flag {
 	return &cli.StringFlag{
 		Name:        "log-format",
 		Sources:     cli.EnvVars(envPrefix + "LOG_FORMAT"),

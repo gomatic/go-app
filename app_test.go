@@ -137,8 +137,8 @@ func TestGlobalFlagsBind(t *testing.T) {
 		Action: func(context.Context, *cli.Command) error { return nil },
 	}
 	want.NoError(root.Run(context.Background(), []string{"root", "--log-level", "debug", "--log-format", "json"}))
-	want.Equal(log.LogLevel("debug"), cfg.LogLevel)
-	want.Equal(log.LogFormat("json"), cfg.LogFormat)
+	want.Equal(log.Level("debug"), cfg.LogLevel)
+	want.Equal(log.Format("json"), cfg.LogFormat)
 }
 
 func TestRunSuccess(t *testing.T) {

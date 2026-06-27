@@ -26,7 +26,7 @@ var getLogger = GetLogger
 
 // action runs the runner with the bound config and encodes its result in the
 // format selected by the root command's output flag.
-func action[C any, R any](ctx context.Context, c *cli.Command, cfg C, runner Runner[C, R]) error {
+func action[C, R any](ctx context.Context, c *cli.Command, cfg C, runner Runner[C, R]) error {
 	result, err := runner(ctx, getLogger(c), cfg, c.Args().Slice()...)
 	if err != nil {
 		return err
@@ -35,7 +35,7 @@ func action[C any, R any](ctx context.Context, c *cli.Command, cfg C, runner Run
 }
 
 // Default binds a config pointer and runner into a cli action function.
-func Default[C any, R any](cfg *C, runner Runner[C, R]) func(context.Context, *cli.Command) error {
+func Default[C, R any](cfg *C, runner Runner[C, R]) func(context.Context, *cli.Command) error {
 	return func(ctx context.Context, c *cli.Command) error {
 		return action(ctx, c, *cfg, runner)
 	}
