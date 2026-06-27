@@ -1,4 +1,4 @@
-// Package app is the urfave/cli/v3 framework shared by every SkyKernel CLI. It
+// Package app is the urfave/cli/v3 framework shared by gomatic CLIs. It
 // supplies the generic, command-agnostic glue — the runner/action combinators,
 // the logger-in-metadata convention, the standard global flags, and the run
 // harness — and nothing tied to any one command. Command-specific flags, errors,
