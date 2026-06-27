@@ -7,7 +7,7 @@ import (
 	"log/slog"
 	"testing"
 
-	slogx "github.com/skykernel/go-log"
+	"github.com/gomatic/go-log"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/urfave/cli/v3"
@@ -103,14 +103,14 @@ func TestGetLoggerIndirection(t *testing.T) {
 func TestGlobalFlags(t *testing.T) {
 	t.Parallel()
 	want := assert.New(t)
-	var cfg slogx.LoggerConfig
+	var cfg log.LoggerConfig
 
 	level := LogLevelFlag(&cfg, "APP_").(*cli.StringFlag)
 	want.Equal("log-level", level.Name)
 	want.Equal("info", level.Value)
 	want.Equal([]string{"APP_LOG_LEVEL"}, level.Sources.EnvKeys())
 
-	format := LogFormatFlag(&cfg, "APP_", slogx.FormatJSON).(*cli.StringFlag)
+	format := LogFormatFlag(&cfg, "APP_", log.FormatJSON).(*cli.StringFlag)
 	want.Equal("log-format", format.Name)
 	want.Equal("json", format.Value)
 	want.Equal([]string{"APP_LOG_FORMAT"}, format.Sources.EnvKeys())
@@ -126,19 +126,19 @@ func TestGlobalFlags(t *testing.T) {
 func TestGlobalFlagsBind(t *testing.T) {
 	t.Parallel()
 	want := assert.New(t)
-	var cfg slogx.LoggerConfig
+	var cfg log.LoggerConfig
 	root := &cli.Command{
 		Name:     "root",
 		Metadata: map[string]any{},
 		Flags: []cli.Flag{
 			LogLevelFlag(&cfg, "APP_"),
-			LogFormatFlag(&cfg, "APP_", slogx.FormatText),
+			LogFormatFlag(&cfg, "APP_", log.FormatText),
 		},
 		Action: func(context.Context, *cli.Command) error { return nil },
 	}
 	want.NoError(root.Run(context.Background(), []string{"root", "--log-level", "debug", "--log-format", "json"}))
-	want.Equal(slogx.LogLevel("debug"), cfg.LogLevel)
-	want.Equal(slogx.LogFormat("json"), cfg.LogFormat)
+	want.Equal(log.LogLevel("debug"), cfg.LogLevel)
+	want.Equal(log.LogFormat("json"), cfg.LogFormat)
 }
 
 func TestRunSuccess(t *testing.T) {

@@ -9,7 +9,7 @@ import (
 	"context"
 	"log/slog"
 
-	output "github.com/skykernel/go-output"
+	output "github.com/gomatic/go-output"
 	"github.com/urfave/cli/v3"
 )
 

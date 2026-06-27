@@ -295,6 +295,12 @@ github.com/golangci/swaggoswag v0.0.0-20250504205917-77f2aca3143e h1:ai0EfmVYE2b
 github.com/golangci/swaggoswag v0.0.0-20250504205917-77f2aca3143e/go.mod h1:Vrn4B5oR9qRwM+f54koyeH3yzphlecwERs0el27Fr/s=
 github.com/golangci/unconvert v0.0.0-20250410112200-a129a6e6413e h1:gD6P7NEo7Eqtt0ssnqSJNNndxe69DOQ24A5h7+i3KpM=
 github.com/golangci/unconvert v0.0.0-20250410112200-a129a6e6413e/go.mod h1:h+wZwLjUTJnm/P2rwlbJdRPZXOzaT36/FwnPnY2inzc=
+github.com/gomatic/go-error v0.1.0 h1:V0ZeeswGmuCEY1k/qdbZlJKx6qFvX0MXNJaLRL4yhD8=
+github.com/gomatic/go-error v0.1.0/go.mod h1:+PAmcazlzCIDFBglesekV1LUQTEaQB+5801gftMxgZY=
+github.com/gomatic/go-log v0.1.0 h1:lgPT8tBiSLl9r2Nw0KUvj5aW9mtom0fi0EQWg65O3kU=
+github.com/gomatic/go-log v0.1.0/go.mod h1:8yusazmzf+STyWR3swgBte1xFVSBXQmaOtJaLBTzV0s=
+github.com/gomatic/go-output v0.1.0 h1:gUncBT6Hjt+RT7j3fxw2v6Gqf6Ta3ie7JjgsHH67MzQ=
+github.com/gomatic/go-output v0.1.0/go.mod h1:yxB+O0e59AduZJuYzigSumx7LlYUGYVhBjxNG8TCWwU=
 github.com/google/btree v0.0.0-20180813153112-4030bb1f1f0c/go.mod h1:lNA+9X1NB3Zf8V7Ke586lFgjr2dZNuvo3lPJSGZ5JPQ=
 github.com/google/btree v1.0.0/go.mod h1:lNA+9X1NB3Zf8V7Ke586lFgjr2dZNuvo3lPJSGZ5JPQ=
 github.com/google/go-cmdtest v0.4.1-0.20220921163831-55ab3332a786 h1:rcv+Ippz6RAtvaGgKxc+8FQIpxHgsF+HBzPyYL2cyVU=
@@ -550,12 +556,6 @@ github.com/sirupsen/logrus v1.9.4 h1:TsZE7l11zFCLZnZ+teH4Umoq5BhEIfIzfRDZ1Uzql2w
 github.com/sirupsen/logrus v1.9.4/go.mod h1:ftWc9WdOfJ0a92nsE2jF5u5ZwH8Bv2zdeOC42RjbV2g=
 github.com/sivchari/containedctx v1.0.3 h1:x+etemjbsh2fB5ewm5FeLNi5bUjK0V8n0RB+Wwfd0XE=
 github.com/sivchari/containedctx v1.0.3/go.mod h1:c1RDvCbnJLtH4lLcYD/GqwiBSSf4F5Qk0xld2rBqzJ4=
-github.com/skykernel/go-error v0.1.0 h1:2smp7idDSqiFHPuq3UEemuwdntVA9RDfg0tpbQI9bP8=
-github.com/skykernel/go-error v0.1.0/go.mod h1:eqUl4bEuyKZ+Gikq7qg4+eTZ2icKJ+Lyfg2Acbz0KuM=
-github.com/skykernel/go-log v0.1.0 h1:RjV0c90DaUXE+URnERR7vw7LLq/kT4NzAogHY1t5gu4=
-github.com/skykernel/go-log v0.1.0/go.mod h1:0849g3zKtLZj/eUa0FbUWEqgd13B4esjAiQ/yV0dwMU=
-github.com/skykernel/go-output v0.1.0 h1:gQQuquM65L8Mb4s6pbqPQFGvgqLsfubbgHsxRHk2QLc=
-github.com/skykernel/go-output v0.1.0/go.mod h1:dpve1IOnMZ1WtkdhDSeo8h2ccz4FdDM4eZw5NgjbBwc=
 github.com/sonatard/noctx v0.5.1 h1:wklWg9c9ZYugOAk7qG4yP4PBrlQsmSLPTvW1K4PRQMs=
 github.com/sonatard/noctx v0.5.1/go.mod h1:64XdbzFb18XL4LporKXp8poqZtPKbCrqQ402CV+kJas=
 github.com/sourcegraph/go-diff v0.8.0 h1:ipIyu4cTsLbIrln4l0qtHA3r0a7gyK4ntKjtQytHhvY=
