@@ -5,12 +5,16 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
+// EnvPrefix is the namespace prepended to each standard flag's environment
+// variable source (e.g. "APP_" yields APP_LOG_LEVEL, APP_LOG_FORMAT, APP_OUTPUT).
+type EnvPrefix string
+
 // LogLevelFlag returns the standard --log-level global flag, sourced from
 // <envPrefix>LOG_LEVEL and bound to cfg.
-func LogLevelFlag(cfg *log.LoggerConfig, envPrefix string) cli.Flag {
+func LogLevelFlag(cfg *log.LoggerConfig, envPrefix EnvPrefix) cli.Flag {
 	return &cli.StringFlag{
 		Name:        "log-level",
-		Sources:     cli.EnvVars(envPrefix + "LOG_LEVEL"),
+		Sources:     cli.EnvVars(string(envPrefix) + "LOG_LEVEL"),
 		Value:       "info",
 		Usage:       "Logging level (debug, info, warn, error)",
 		Destination: (*string)(&cfg.LogLevel),
@@ -20,10 +24,10 @@ func LogLevelFlag(cfg *log.LoggerConfig, envPrefix string) cli.Flag {
 // LogFormatFlag returns the standard --log-format global flag, sourced from
 // <envPrefix>LOG_FORMAT, bound to cfg, defaulting to def (consumers differ:
 // a CLI defaults to text, a daemon to json).
-func LogFormatFlag(cfg *log.LoggerConfig, envPrefix string, def log.Format) cli.Flag {
+func LogFormatFlag(cfg *log.LoggerConfig, envPrefix EnvPrefix, def log.Format) cli.Flag {
 	return &cli.StringFlag{
 		Name:        "log-format",
-		Sources:     cli.EnvVars(envPrefix + "LOG_FORMAT"),
+		Sources:     cli.EnvVars(string(envPrefix) + "LOG_FORMAT"),
 		Value:       string(def),
 		Usage:       "Log output format (text, json)",
 		Destination: (*string)(&cfg.LogFormat),
@@ -33,11 +37,11 @@ func LogFormatFlag(cfg *log.LoggerConfig, envPrefix string, def log.Format) cli.
 // OutputFlag returns the standard --output/-o global flag selecting the result
 // encoding, sourced from <envPrefix>OUTPUT and defaulting to json. The action
 // combinator reads it to encode each command's result.
-func OutputFlag(envPrefix string) cli.Flag {
+func OutputFlag(envPrefix EnvPrefix) cli.Flag {
 	return &cli.StringFlag{
 		Name:    outputFlagName,
 		Aliases: []string{"o"},
-		Sources: cli.EnvVars(envPrefix + "OUTPUT"),
+		Sources: cli.EnvVars(string(envPrefix) + "OUTPUT"),
 		Value:   "json",
 		Usage:   "Result output format (json, yaml)",
 	}

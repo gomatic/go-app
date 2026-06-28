@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/gomatic/go-log"
+	"github.com/gomatic/go-output"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/urfave/cli/v3"
@@ -54,7 +55,7 @@ func TestActionEncodesYAML(t *testing.T) {
 }
 
 func TestActionUnsupportedFormat(t *testing.T) {
-	require.New(t).ErrorContains(secondErr(runCommand(okRunner, "--output", "xml", "do")), "unsupported output format")
+	require.New(t).ErrorIs(secondErr(runCommand(okRunner, "--output", "xml", "do")), output.ErrUnsupportedFormat)
 }
 
 func TestActionPropagatesRunnerError(t *testing.T) {
