@@ -43,13 +43,14 @@ func greet(_ context.Context, logger *slog.Logger, _ config, args ...string) (re
 func main() {
 	var cfg config
 	var logCfg log.LoggerConfig
+	logFlags := app.LoggerFlags{Config: &logCfg, EnvPrefix: "GREETER_"}
 
 	cmd := &cli.Command{
 		Name:     "greeter",
 		Metadata: map[string]any{},
 		Flags: []cli.Flag{
-			app.LogLevelFlag(&logCfg, "GREETER_"),
-			app.LogFormatFlag(&logCfg, "GREETER_", log.FormatText),
+			logFlags.LevelFlag(),
+			logFlags.FormatFlag(log.FormatText),
 			app.OutputFlag("GREETER_"),
 		},
 		Before: app.LoggerBefore(func(*cli.Command) *slog.Logger {
@@ -69,7 +70,7 @@ The global flags resolve from `--flag`, the matching `GREETER_*` environment var
 - `Run(ctx, cmd, args, exit)` — runs a `*cli.Command` with SIGINT/SIGTERM cancellation, logging any error and exiting non-zero via the injected `exit`.
 - `Default(cfg, runner)` — binds a config pointer and a `Runner` into a cli action that encodes the result via the output flag.
 - `Runner[CONFIG, RESULT]` — the function type for a command's work.
-- `LogLevelFlag`, `LogFormatFlag`, `OutputFlag` — the standard global flags.
+- `LoggerFlags` (`LevelFlag`, `FormatFlag`), `OutputFlag` — the standard global flags; `LoggerFlags` binds the logging flags to a shared `log.LoggerConfig`.
 - `GetLogger`, `LoggerBefore`, `LoggerMetadataKey` — the logger-in-metadata convention.
 
 See the full reference with `go doc -all github.com/gomatic/go-app`.
