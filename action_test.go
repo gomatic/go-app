@@ -69,6 +69,52 @@ func TestActionPropagatesRunnerError(t *testing.T) {
 // unsupported-format and runner-error cases to a single readable line.
 func secondErr(_ string, err error) error { return err }
 
+// runInteractiveCommand mirrors runCommand for a child bound with Interactive.
+func runInteractiveCommand(runner Runner[struct{}, actionResult], args ...string) (string, error) {
+	var cfg struct{}
+	var buf bytes.Buffer
+	root := &cli.Command{
+		Name:     "root",
+		Writer:   &buf,
+		Metadata: map[string]any{},
+		Flags:    []cli.Flag{OutputFlag("ROOT_")},
+		Commands: []*cli.Command{
+			{Name: "do", Action: Interactive(&cfg, runner)},
+		},
+	}
+	err := root.Run(context.Background(), append([]string{"root"}, args...))
+	return buf.String(), err
+}
+
+func TestInteractiveWritesNothing(t *testing.T) {
+	want, must := assert.New(t), require.New(t)
+	out, err := runInteractiveCommand(okRunner, "do")
+	must.NoError(err)
+	want.Empty(out)
+}
+
+func TestInteractivePropagatesRunnerError(t *testing.T) {
+	sentinel := errors.New("boom")
+	failing := func(_ context.Context, _ *slog.Logger, _ struct{}, _ ...string) (actionResult, error) {
+		return actionResult{}, sentinel
+	}
+	assert.New(t).ErrorIs(secondErr(runInteractiveCommand(failing, "do")), sentinel)
+}
+
+func TestInteractiveSuppliesLoggerAndArgs(t *testing.T) {
+	want, must := assert.New(t), require.New(t)
+	var gotLogger *slog.Logger
+	var gotArgs []string
+	spy := func(_ context.Context, logger *slog.Logger, _ struct{}, args ...string) (actionResult, error) {
+		gotLogger, gotArgs = logger, args
+		return actionResult{V: "discarded"}, nil
+	}
+	_, err := runInteractiveCommand(spy, "do", "a", "b")
+	must.NoError(err)
+	want.NotNil(gotLogger)
+	want.Equal([]string{"a", "b"}, gotArgs)
+}
+
 func TestGetLoggerIndirection(t *testing.T) {
 	t.Parallel()
 	// The action path resolves its logger through the getLogger indirection.
