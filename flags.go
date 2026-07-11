@@ -28,7 +28,7 @@ func (f LoggerFlags) LevelFlag() cli.Flag {
 		Sources:     cli.EnvVars(string(f.EnvPrefix) + "LOG_LEVEL"),
 		Value:       "info",
 		Usage:       "Logging level (debug, info, warn, error)",
-		Destination: (*string)(&f.Config.LogLevel),
+		Destination: (*string)(&f.Config.Level),
 	}
 }
 
@@ -41,7 +41,7 @@ func (f LoggerFlags) FormatFlag(def log.Format) cli.Flag {
 		Sources:     cli.EnvVars(string(f.EnvPrefix) + "LOG_FORMAT"),
 		Value:       string(def),
 		Usage:       "Log output format (text, json)",
-		Destination: (*string)(&f.Config.LogFormat),
+		Destination: (*string)(&f.Config.Format),
 	}
 }
 
